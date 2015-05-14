@@ -1,0 +1,43 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          fluentd
+# Required-Start:    $local_fs $remote_fs $syslog
+# Required-Stop:     $local_fs $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: fluentd
+# Description: fluentd
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+start ()	{
+	/usr/local/bin/fluentd -c /etc/fluent/fluent.conf &
+}
+
+stop ()	{
+	killall fluentd
+}
+
+restart ()	{
+	stop
+	start
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart|reload|force-reload)
+    restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart|reload|force-reload}"
+    exit 1
+esac
+
+exit 0
