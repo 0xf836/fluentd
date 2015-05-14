@@ -1,0 +1,2 @@
+# fluentd
+init script
