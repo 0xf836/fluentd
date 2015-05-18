@@ -1,0 +1,12 @@
+[Unit]
+Description=fluentd
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/fluentd -c /etc/fluentd/fluent.conf -o /var/log/fluentd/fluentd.log --daemon /var/run/fluentd/fluentd.pid
+PIDFile=/var/run/fluentd/fluentd.pid
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
